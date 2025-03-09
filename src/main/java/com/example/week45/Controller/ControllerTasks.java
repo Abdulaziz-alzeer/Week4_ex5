@@ -10,7 +10,6 @@ import java.util.ArrayList;
 @RequestMapping("/api/version1/tasks")
 public class ControllerTasks {
     ArrayList<Tasks> listTasks=new ArrayList<>();
-    ArrayList<Tasks>fixTasks=new ArrayList<>();
     @GetMapping("/get")
     public ArrayList<Tasks>getTasks(){
         return listTasks;
@@ -34,21 +33,10 @@ public class ControllerTasks {
     }
 
     @GetMapping("/search")
-    public ApiResponse searchTask(@RequestBody Tasks search){
+    public ApiResponse searchTask(@RequestBody String search){
         if (listTasks.contains(search)){
             return new ApiResponse("found +_+");
         }else
             return new ApiResponse("not found !");
     }
-
-    @GetMapping("/change")
-    public ApiResponse changeTasks(){
-        if(listTasks.equals(fixTasks)){
-            return new ApiResponse("you don't make change");
-        }else
-            return new ApiResponse( "you make change ");
-    }
-
-
-
     }
