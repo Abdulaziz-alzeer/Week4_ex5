@@ -33,10 +33,25 @@ public class ControllerTasks {
     }
 
     @GetMapping("/search")
-    public ApiResponse searchTask(@RequestBody String search){
-        if (listTasks.contains(search)){
-            return new ApiResponse("found +_+");
-        }else
-            return new ApiResponse("not found !");
+    public ApiResponse searchListInfo(@RequestBody Task title) {
+        for(Task use :listInfo){
+            if (use.getTitle().equalsIgnoreCase(title.getTitle())) {
+                return new ApiResponse("found");
+            }
+        }
+        return new ApiResponse("not found ");
     }
+     @PutMapping("/turn-status")
+    public ApiResponse updateStatus(@RequestBody Task nStatus){
+        for(Task use:listInfo){
+            if(use.getTitle().equalsIgnoreCase(nStatus.getTitle())){
+                use.setStatus(nStatus.isStatus());
+                return new ApiResponse("turn status is done");
+            }
+        }
+
+        return new ApiResponse("turn status not done");
     }
+
+
+}
